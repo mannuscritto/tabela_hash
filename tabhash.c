@@ -5,14 +5,17 @@
 
 unsigned long int f_foldadd (char *chave, unsigned long int m)
 {
-   unsigned long int k;
+   unsigned long int k, i = 0;
    char *t;
    
    k = 0;
    t = chave;
    
-   while (*t != '\0')
-      k = k + ((unsigned long int) *t) % m;
+	while (t[i] != '\0') {
+   		k = k + ((unsigned long int) *t) % m;
+   		i++;
+	}
+      
    
    return k;
 }

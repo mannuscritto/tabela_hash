@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
    * faca funcionar
    */
   
-  
+	  
   system("PAUSE");	
   return 0;
 }
