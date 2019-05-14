@@ -12,6 +12,6 @@ typedef REGISTRO* EntradaHash;
 unsigned long int f_foldadd (char *, unsigned long int);     // chave, m
 unsigned long int f_mult (char *, unsigned long int, long double); // chave, m, A
 
-int addToHash (REGISTRO, EntradaHash*);
+int addToHash (REGISTRO, EntradaHash*, unsigned long int);
 REGISTRO isInHash (char*, EntradaHash*);
 int removeFromHash (char*, EntradaHash*);

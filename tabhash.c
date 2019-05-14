@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 #include "tabhash.h"
 
 unsigned long int f_foldadd (char *chave, unsigned long int m)
@@ -28,3 +29,60 @@ unsigned long int f_mult (char *chave, unsigned long int m, long double A)
    k = floor(m * (k_temp * A - floor (k_temp * A)));
    return k;
 }
+
+int addToHash (REGISTRO tcont, EntradaHash* agenda, unsigned long int m)
+{
+	EntradaHash contato = (EntradaHash)malloc(sizeof(REGISTRO));
+	if (contato == NULL) {
+		printf("Erro ao alocar noh!\n");
+		exit(1);
+	}
+	strcpy(contato->nome, tcont.nome);
+	strcpy(contato->RG, tcont.RG);
+	contato->anoNascimento = tcont.anoNascimento;
+	contato->CPF = tcont.CPF;
+	contato->prox = NULL;
+	unsigned long index = f_foldadd(contato->nome, m);
+	if (agenda[index] == NULL) {
+		agenda[index] = contato;
+	} else {
+		EntradaHash p, q;
+		p = agenda[index];
+		q = NULL;
+		while (p != NULL) {
+			q = p;
+			p = p->prox;
+		}
+		q->prox = contato;
+	}
+	return 1;
+}
+
+REGISTRO isInHash (char *nome, EntradaHash* agenda)
+{
+	const unsigned long int m = 43991;
+	unsigned long index = f_foldadd(nome, m);
+	if (agenda[index] != NULL) {
+		EntradaHash p, q;
+		p = agenda[index];
+		q = NULL;
+		while ((p != NULL) && (strcmp(p->nome, nome) != 0)) {
+			q = p;
+			p = p->prox;
+		}
+		if (q == NULL) {
+			return *p;
+		}
+		return *q;
+	} else {
+		return;
+	}
+}
+
+
+
+
+
+
+
+
