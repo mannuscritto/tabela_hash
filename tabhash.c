@@ -4,34 +4,30 @@
 #include <string.h>
 #include "tabhash.h"
 
-unsigned long int f_foldadd (char *chave, unsigned long int m)
-{
-   unsigned long int k, i = 0;
-   char *t;
-   
-   k = 0;
-   t = chave;
-   
+unsigned long int f_foldadd (char *chave, unsigned long int m) {
+	unsigned long int k, i = 0;
+	char *t;
+
+	k = 0;
+	t = chave;
+
 	while (t[i] != '\0') {
-   		k = k + ((unsigned long int) *t) % m;
-   		i++;
+		k = k + ((unsigned long int) *t) % m;
+		i++;
 	}
-      
-   
-   return k;
+
+	return k;
 }
 
-unsigned long int f_mult (char *chave, unsigned long int m, long double A)
-{
-   unsigned long int k_temp, k;
-   
-   k_temp = f_foldadd (chave, 100010717);
-   k = floor(m * (k_temp * A - floor (k_temp * A)));
-   return k;
+unsigned long int f_mult (char *chave, unsigned long int m, long double A) {
+	unsigned long int k_temp, k;
+	
+	k_temp = f_foldadd (chave, 100010717);
+	k = floor(m * (k_temp * A - floor (k_temp * A)));
+	return k;
 }
 
-int addToHash (REGISTRO tcont, EntradaHash* agenda, unsigned long int m)
-{
+int addToHash (REGISTRO tcont, EntradaHash* agenda, unsigned long int m) {
 	EntradaHash contato = (EntradaHash)malloc(sizeof(REGISTRO));
 	if (contato == NULL) {
 		printf("Erro ao alocar noh!\n");
@@ -58,8 +54,7 @@ int addToHash (REGISTRO tcont, EntradaHash* agenda, unsigned long int m)
 	return 1;
 }
 
-REGISTRO isInHash (char *nome, EntradaHash* agenda)
-{
+REGISTRO isInHash (char *nome, EntradaHash* agenda) {
 	const unsigned long int m = 43991;
 	unsigned long index = f_foldadd(nome, m);
 	if (agenda[index] != NULL) {
@@ -71,12 +66,40 @@ REGISTRO isInHash (char *nome, EntradaHash* agenda)
 			p = p->prox;
 		}
 		if (q == NULL) {
+			printf("Retornando p\n");
 			return *p;
 		}
+		printf("Retornando q\n");
 		return *q;
+	} else {
+		printf("O contato nao esta na agenda!\n");
+		return;
+	}
+}
+
+int removeFromHash(char *nome, EntradaHash *agenda) {
+	const unsigned long int m = 43991;
+	unsigned long index = f_foldadd(nome, m);
+	if (agenda[index] != NULL) {
+		EntradaHash p, q, temp;
+		p = agenda[index];
+		q = NULL;
+		while ((p != NULL) && (strcmp(p->nome, nome) != 0)) {
+			q = p;
+			p = p->prox;
+		}
+		if (q == NULL) {
+			temp = p;
+			p = p->prox;
+		} else {
+			temp = q;
+			q = q->prox;	
+		}
 	} else {
 		return;
 	}
+	free(temp);
+	return 1;
 }
 
 

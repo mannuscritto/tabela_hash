@@ -3,7 +3,7 @@ typedef struct __registro
    char nome[30];
    char RG[15];
    unsigned short int anoNascimento;
-   unsigned long CPF;
+   unsigned long long int CPF;
    struct __registro *prox;
 } REGISTRO;
 
