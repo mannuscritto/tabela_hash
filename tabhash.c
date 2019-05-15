@@ -78,27 +78,14 @@ int addToHash (REGISTRO tcont, EntradaHash* agenda, unsigned long int m) {
 	}
 }*/
 
-int isInHash (char *nome, EntradaHash *agenda, REGISTRO cont) {
+int isInHash (char *nome, EntradaHash *agenda, REGISTRO *cont) {
 	const unsigned long int m = 43991;
 	unsigned long index = f_foldadd(nome, m);
-	EntradaHash p, q;
 	if (agenda[index] != NULL) {
-		p = agenda[index];
-		q = NULL;
-		while ((p != NULL) && (strcmp(p->nome, nome) != 0)) {
-			q = p;
-			p = p->prox;
-		}
-		if (q == NULL) {
-			cont = *p;
-			printf("Passando %s\n", p->nome);
-			return 1;
-		}
-		cont = *q;
-		printf("Passando %s\n", q->nome);
+		cont = agenda[index];
 		return 1;
 	} else {
-		return;
+		return 0;
 	}
 }
 
