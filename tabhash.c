@@ -64,22 +64,17 @@ int isInHash (char *nome, EntradaHash *agenda, REGISTRO *cont) {
 	if (agenda[index] != NULL) {
 		p = agenda[index];
 		q = NULL;
-		printf("Procurando...\n");
 		while ((p != NULL) && (strcmp(p->nome, nome) != 0)) {
 			q = p;
-			printf("RG: %s\n", q->RG);
 			p = p->prox;
 		}
 		if (q == NULL) {
-			printf("Laco nao rodou - Retornando p, RG: %s\n", p->RG);
 			*cont = *p;
 			return 1;
 		} else if (p != NULL) {
-			printf("Laco parou no meio - Retornando q, RG: %s\n", q->RG);
 			*cont = *q;
 			return 1;			
 		} else {
-			printf("Laco rodou inteiro e nao achou\n");
 			return 0;
 		}
 	} else {
@@ -93,6 +88,7 @@ int removeFromHash (char *nomeContato, EntradaHash *agenda) {
 	
 	if (!isInHash(nomeContato, agenda, &contato)) {
 		printf("O contato nao esta na agenda!\n");
+		return 0;
 	} else {
 		exibirRegistro(contato, nomeContato, 1);
 	}
@@ -120,19 +116,11 @@ int removeFromHash (char *nomeContato, EntradaHash *agenda) {
 	return 1;
 }
 
-void exibirRegistro(REGISTRO contato, char *nome, int numerar) {
-	REGISTRO contTemp = contato;
-	EntradaHash temp = &contTemp;
-	if (&contato == temp) {
-		printf("Ponteiros iguais\n");
-	} else {
-		printf("Ponteiros diferentes\n");
-	}
-	system("pause");
-	char *cont_nome = _strupr(nome);
+void exibirRegistro(REGISTRO cont, char *nome, int numerar) {
+	REGISTRO contato = cont;
+	EntradaHash temp = &contato;
 	while(temp != NULL) {
-		char *temp_nome = _strupr(temp->nome);
-		if (strcmp(temp->nome, cont_nome) == 0) {
+		if (strcmp(temp->nome, nome) == 0) {
 			printf("+------------------------------------------------+\n");
 			if (numerar) printf("|[ %2d  ]%41s|\n", numerar++, "");
 			printf("|Nome: %42s|\n|RG: %44s|\n|Ano de nascimento: %29hu|\n|CPF: %43llu|\n",
