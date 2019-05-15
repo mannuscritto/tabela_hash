@@ -107,13 +107,16 @@ int removeFromHash (char *nomeContato, EntradaHash *agenda) {
 		p = p->prox;
 	}
 	char conf;
-	printf("Tem certeza que deseja remover %s? [S/N]", toupper(p->nome));
+	printf("Tem certeza que deseja remover %s? [S/N]", p->nome);
 	scanf(" %c", &conf);
 	if (conf == 'S') {
+		printf("Removendo %s\n", p->RG);
 		q->prox = p->prox;
 		free(p);
+		return 1;
+	} else {
+		return 0;
 	}
-	return 1;
 }
 
 void exibirRegistro(REGISTRO cont, char *nome, int numerar) {

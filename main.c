@@ -63,7 +63,6 @@ int main(int argc, char *argv[]) {
 					} else {
 						exibirRegistro(contato, nome, 0);
 					}
-					//exibirRegistro(contato, nome, 0);
 		 	   		break;
 		 	   	case 3:
 		 	   		printf("Digite o nome do contato: ");
@@ -71,7 +70,12 @@ int main(int argc, char *argv[]) {
 		 	   		if (!removeFromHash(nome, tabelaHash)) {
 						printf("Erro ao remover contato!\n");
 					}
-					//break;
+					break;
+				case 0:
+					exit(0);
+					break;
+				default:
+					printf("Opcao invalida!\n");
 		}
 		system("pause");
 	}
