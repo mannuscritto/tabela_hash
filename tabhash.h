@@ -13,5 +13,7 @@ unsigned long int f_foldadd (char *, unsigned long int);     // chave, m
 unsigned long int f_mult (char *, unsigned long int, long double); // chave, m, A
 
 int addToHash (REGISTRO, EntradaHash*, unsigned long int);
-REGISTRO isInHash (char*, EntradaHash*);
+/* TODO (#1#): Alterar assinatura de função para retornar int, e 
+                passar o REGISTRO como ponteiro */
+int isInHash (char*, EntradaHash*, EntradaHash);
 int removeFromHash (char*, EntradaHash*);

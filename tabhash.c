@@ -54,7 +54,7 @@ int addToHash (REGISTRO tcont, EntradaHash* agenda, unsigned long int m) {
 	return 1;
 }
 
-REGISTRO isInHash (char *nome, EntradaHash* agenda) {
+int isInHash (char *nome, EntradaHash *agenda, EntradaHash cont) {
 	const unsigned long int m = 43991;
 	unsigned long index = f_foldadd(nome, m);
 	if (agenda[index] != NULL) {
@@ -66,22 +66,21 @@ REGISTRO isInHash (char *nome, EntradaHash* agenda) {
 			p = p->prox;
 		}
 		if (q == NULL) {
-			printf("Retornando p\n");
-			return *p;
+			cont = p;
+			return 1;
 		}
-		printf("Retornando q\n");
-		return *q;
+		cont = q;
+		return 1;
 	} else {
-		printf("O contato nao esta na agenda!\n");
-		return;
+		return 0;
 	}
 }
 
 int removeFromHash(char *nome, EntradaHash *agenda) {
 	const unsigned long int m = 43991;
 	unsigned long index = f_foldadd(nome, m);
+	EntradaHash p, q, temp;
 	if (agenda[index] != NULL) {
-		EntradaHash p, q, temp;
 		p = agenda[index];
 		q = NULL;
 		while ((p != NULL) && (strcmp(p->nome, nome) != 0)) {
