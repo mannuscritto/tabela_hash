@@ -58,26 +58,32 @@ int main(int argc, char *argv[]) {
 				case 2:
 					printf("Digite o nome do contato: ");
 		 	   		scanf("%s", nome);
-		 	   		if (!isInHash(nome, tabelaHash, &contato)) {
+		 	   		if (!isInHash(nome, tabelaHash, contato)) {
 		 	   			printf("O contato nao esta na agenda!\n");
 					} else {
 						do {
 							printf("Nome: %s\nRG: %s\nAno de nascimento: %hu\nCPF: %llu\n", 
-							contato.nome, contato.RG, contato.anoNascimento, contato.CPF);	
-							contato = *contato.prox;
+							contato.nome, contato.RG, contato.anoNascimento, contato.CPF);
+							if (contato.prox != NULL)
+								contato = *contato.prox;
+							else
+								break;
 						} while(&contato != NULL);
 					}
 		 	   		break;
 		 	   	case 3:
 		 	   		printf("Digite o nome do contato: ");
 		 	   		scanf("%s", nome);
-		 	   		if (!isInHash(nome, tabelaHash, &contato)) {
+		 	   		if (!isInHash(nome, tabelaHash, contato)) {
 		 	   			printf("O contato nao esta na agenda!\n");
 					} else {
 						do {
 							printf("Nome: %s\nRG: %s\nAno de nascimento: %hu\nCPF: %llu\n", 
 							contato.nome, contato.RG, contato.anoNascimento, contato.CPF);	
-							contato = *contato.prox;
+							if (contato.prox != NULL)
+								contato = *contato.prox;
+							else
+								break;
 						} while(&contato.prox != NULL);
 					}
 					char conf;
