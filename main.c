@@ -58,42 +58,18 @@ int main(int argc, char *argv[]) {
 				case 2:
 					printf("Digite o nome do contato: ");
 		 	   		scanf("%s", nome);
-		 	   		EntradaHash cont;
-		 	   		if (!isInHash(nome, tabelaHash, cont)) {
+		 	   		if (!isInHash(nome, tabelaHash, &contato)) {
 		 	   			printf("O contato nao esta na agenda!\n");
 					} else {
-						do {
-							printf("Nome: %s\nRG: %s\nAno de nascimento: %hu\nCPF: %llu\n", 
-							contato.nome, contato.RG, contato.anoNascimento, contato.CPF);	
-							if (cont->prox != NULL)
-								cont = cont->prox;
-							else
-								break;
-						} while(cont != NULL);
+						exibirRegistro(contato, nome, 0);
 					}
+					//exibirRegistro(contato, nome, 0);
 		 	   		break;
 		 	   	case 3:
 		 	   		printf("Digite o nome do contato: ");
 		 	   		scanf("%s", nome);
-		 	   		if (!isInHash(nome, tabelaHash, &contato)) {
-		 	   			printf("O contato nao esta na agenda!\n");
-					} else {
-						do {
-							printf("Nome: %s\nRG: %s\nAno de nascimento: %hu\nCPF: %llu\n", 
-							contato.nome, contato.RG, contato.anoNascimento, contato.CPF);	
-							if (contato.prox != NULL)
-								contato = *contato.prox;
-							else
-								break;
-						} while(&contato.prox != NULL);
-					}
-					char conf;
-					printf("Tem certeza que deseja remover %s? [S/N]", toupper(contato.nome));
-					scanf(" %c", &conf);
-					if (conf == 'S') {
-						if (!removeFromHash(contato.nome, tabelaHash)) {
-							printf("Erro ao remover contato!");
-						}
+		 	   		if (!removeFromHash(nome, tabelaHash)) {
+						printf("Erro ao remover contato!\n");
 					}
 					//break;
 		}
