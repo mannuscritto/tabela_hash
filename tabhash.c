@@ -102,7 +102,11 @@ int removeFromHash (char *nomeContato, EntradaHash *agenda) {
 	EntradaHash p, q;
 	p = &contato;
 	q = NULL;
-	for(i = 1; i < numReg; i++){
+	while (i < numReg) {
+		if (strcmp(p->nome, nomeContato) == 0) {
+			i++;
+		}
+		if (i == numReg) break;
 		q = p;
 		p = p->prox;
 		if (p == NULL) {
