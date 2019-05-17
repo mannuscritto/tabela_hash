@@ -16,11 +16,11 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
-#include <locale.h>
-#include "tabhash.h"
+//#include <locale.h>
+#include "tabhash.c"
 
 int main(int argc, char *argv[]) {
-	setlocale(LC_ALL, "Portuguese");
+	//setlocale(LC_ALL, "Portuguese");
 	const unsigned long int m = 43991; // http://compoasso.free.fr/primelistweb/page/prime/liste_online_en.php
 	const long double A = (sqrt(5) - 1) / 2.0;
 	
@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
 	unsigned short int anoNasc;
 	unsigned long long int cpf;
 	while (1) {
-		system("cls");
+		system("clear");
 		printf("\t\tMenu\n\n");
 		printf("\tInserir um contato..............[1]\n");
 		printf("\tBuscar um contato...............[2]\n");
@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
 		printf("\tSair............................[0]\n");
 		printf("\nDigite a opção: ");
 		scanf("%d", &opt);
-		system("cls");
+		system("clear");
 		switch (opt) {
 			   case 1:
 			   		printf("\t\tADICIONAR CONTATO\n\n");
@@ -97,9 +97,9 @@ int main(int argc, char *argv[]) {
 				default:
 					printf("Opção inválida!\n");
 		}
-		system("pause");
+		system("read -p \"Pressione enter para continuar....\" Continuando...");
 	}
 	 
-	system("PAUSE");
+	system("read -p \"Pressione enter para continuar....\" Continuando...");
 	return 0;
 }
