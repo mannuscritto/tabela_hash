@@ -118,13 +118,9 @@ int removeFromHash (char *nomeContato, EntradaHash *agenda) {
 	unsigned long int m = 43991;
 	unsigned long index = f_foldadd(nomeContato, m);
 	if(q == NULL) {
-		printf("q é nulo\n");
 		p = agenda[index];
 		agenda[index] = agenda[index]->prox;
 	} else {
-		printf("q (RG: %s) não é nulo\n", q->RG);
-		if (p != NULL)printf("p (RG: %s)\n", p->RG);
-		if (p->prox != NULL) printf("p->prox (RG: %s)\n", p->prox->RG);
 		q->prox = p->prox;
 	}
 	free(p);
@@ -140,8 +136,6 @@ void exibirRegistro(REGISTRO cont, char *nome, int numerar) {
 			printf("|Nome: %42s|\n|RG: %44s|\n|Ano de nascimento: %29hu|\n|CPF: %43llu|\n",
 			temp->nome, temp->RG, temp->anoNascimento, temp->CPF);
 		}
-		if (temp != NULL) printf("temp (RG: %s) não é nulo\n", temp->RG);
-		else printf("temp é nulo\n");
 		temp = temp->prox;
 	}
 	printf("+------------------------------------------------+\n");

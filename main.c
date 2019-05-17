@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
 	unsigned short int anoNasc;
 	unsigned long long int cpf;
 	while (1) {
-		system("cls");
+		system("CLS");
 		printf("\t\tMenu\n\n");
 		printf("\tInserir um contato..............[1]\n");
 		printf("\tBuscar um contato...............[2]\n");
@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
 		printf("\tSair............................[0]\n");
 		printf("\nDigite a opção: ");
 		scanf("%d", &opt);
-		system("cls");
+		system("CLS");
 		switch (opt) {
 			   case 1:
 			   		printf("\t\tADICIONAR CONTATO\n\n");
@@ -82,9 +82,9 @@ int main(int argc, char *argv[]) {
 					}
 					break;
 				case 4:
-					//printf("Digite o nome do arquivo: ");
-		 	   		//scanf("%s", nome);
-		 	   		if (!importarRegistros("registros.txt", tabelaHash)) {
+					printf("Digite o nome do arquivo: ");
+		 	   		scanf("%s", nome);
+		 	   		if (!importarRegistros(nome, tabelaHash)) {
 		 	   			printf("Os contatos não foram importados!\n");
 		 	   			exit(1);
 					} else {
@@ -97,7 +97,7 @@ int main(int argc, char *argv[]) {
 				default:
 					printf("Opção inválida!\n");
 		}
-		system("pause");
+		system("PAUSE");
 	}
 	 
 	system("PAUSE");
