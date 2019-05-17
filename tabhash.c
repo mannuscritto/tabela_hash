@@ -27,9 +27,6 @@ unsigned long int f_mult (char *chave, unsigned long int m, long double A) {
 	return k;
 }
 
-/*
- @Param tcont: 
-*/
 int addToHash (REGISTRO tcont, EntradaHash* agenda) {
 	EntradaHash contato = (EntradaHash)malloc(sizeof(REGISTRO));
 	if (contato == NULL) {
@@ -111,28 +108,27 @@ int removeFromHash (char *nomeContato, EntradaHash *agenda) {
 		}
 		if (i != numReg) {
 			q = p;
-			printf("q foi atribuido\n");
 			p = p->prox;	
 		}//se ja chegou no registro, para o laco
 	} while (i < numReg);
-	if (q != NULL) 
-		printf("q->nome: %s\n", q->nome);
-	else
-		printf("q é nulo\n");
-	if (p != NULL) 
-		printf("p->nome: %s\n", p->nome);
-	else
-		printf("p é nulo\n");
 	
 	printf("Tem certeza que deseja remover %s? [S/N]", p->nome);
 	scanf(" %c", &conf);
 	if (conf == 'S') {//se usuario confirmar
 		const unsigned long int m = 43991;
 		unsigned long index = f_foldadd(contato.nome, m);
-		if (q == NULL)
-			agenda[index] = NULL;
-		else
+		if (q == NULL) {//indica que só há um contato naquela posicao da agenda
+			agenda[index] = p->prox;
+		} else {
+			printf("q, RG: %s\n", q->RG);
+			printf("p, RG: %s\n", p->RG);
+			if (p->prox == NULL) {
+				printf("p->prox é nulo\n");
+				q->prox = NULL;
+			}
 			q->prox = p->prox;
+		}
+		printf("Removendo RG: %s\n", p->RG);
 		free(p);//libera registro da memoria
 		return 1;
 	} else {//se usuario cancelar
@@ -143,13 +139,13 @@ int removeFromHash (char *nomeContato, EntradaHash *agenda) {
 void exibirRegistro(REGISTRO cont, char *nome, int numerar) {
 	REGISTRO contato = cont;
 	EntradaHash temp = &contato;
-	while(temp != NULL) {
-		//if (strcmp(temp->nome, nome) == 0) {
+	while (temp != NULL) {
+		if (strcmp(temp->nome, nome) == 0) {
 			printf("+------------------------------------------------+\n");
 			if (numerar) printf("|[ %2d  ]%41s|\n", numerar++, "");
 			printf("|Nome: %42s|\n|RG: %44s|\n|Ano de nascimento: %29hu|\n|CPF: %43llu|\n",
 			temp->nome, temp->RG, temp->anoNascimento, temp->CPF);
-		//}
+		}
 		temp = temp->prox;
 	}
 	printf("+------------------------------------------------+\n");

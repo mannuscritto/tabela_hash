@@ -38,6 +38,7 @@ int main(int argc, char *argv[]) {
 		printf("\tBuscar um contato...............[2]\n");
 		printf("\tRemover um contato..............[3]\n");
 		printf("\tImportar contatos...............[4]\n");
+		printf("\tSair............................[0]\n");
 		printf("\nDigite a opção: ");
 		scanf("%d", &opt);
 		system("cls");
