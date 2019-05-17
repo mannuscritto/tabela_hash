@@ -135,6 +135,8 @@ void exibirRegistro(REGISTRO cont, char *nome, int numerar) {
 			printf("|Nome: %42s|\n|RG: %44s|\n|Ano de nascimento: %29hu|\n|CPF: %43llu|\n",
 			temp->nome, temp->RG, temp->anoNascimento, temp->CPF);
 		}
+		if (temp != NULL) printf("temp (RG: %s) não é nulo\n", temp->RG);
+		else printf("temp é nulo\n");
 		temp = temp->prox;
 	}
 	printf("+------------------------------------------------+\n");
