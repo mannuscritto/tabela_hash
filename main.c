@@ -81,9 +81,9 @@ int main(int argc, char *argv[]) {
 					}
 					break;
 				case 4:
-					printf("Digite o nome do arquivo: ");
-		 	   		scanf("%s", nome);
-		 	   		if (!importarRegistros(nome, tabelaHash)) {
+					//printf("Digite o nome do arquivo: ");
+		 	   		//scanf("%s", nome);
+		 	   		if (!importarRegistros("registros.txt", tabelaHash)) {
 		 	   			printf("Os contatos não foram importados!\n");
 		 	   			exit(1);
 					} else {
