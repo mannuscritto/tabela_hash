@@ -119,6 +119,7 @@ int removeFromHash (char *nomeContato, EntradaHash *agenda) {
 	unsigned long index = f_foldadd(nomeContato, m);
 	if(q == NULL) {
 		printf("q é nulo\n");
+		p = agenda[index];
 		agenda[index] = agenda[index]->prox;
 	} else {
 		printf("q (RG: %s) não é nulo\n", q->RG);
