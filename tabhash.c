@@ -96,44 +96,33 @@ int removeFromHash (char *nomeContato, EntradaHash *agenda) {
 	printf("Digite o numero do registro que deseja remover: ");
 	do {
 		scanf("%d", &numReg);//recebe numero do registro que deseja remover	
-	} while(numReg < 0);
-	if (numReg == 0) return 0;
+	} while (numReg < 0);
+	if(numReg == 0) return 0;
 	
 	EntradaHash p, q;
 	p = &contato;
 	q = NULL;
-	do {//laco percorre ate posicao do registro a ser removido
-		if (strcmp(p->nome, nomeContato) == 0) {//se o nome eh igual
-			i++;//incrementa contador = achou um registro com o mesmo nome
+	for(i = 1; i < numReg; i++){
+		q = p;
+		p = p->prox;
+		if (p == NULL) {
+			printf("Você digitou uma posição inválida!\n");
+			return 0;
 		}
-		if (i != numReg) {
-			q = p;
-			p = p->prox;	
-		}//se ja chegou no registro, para o laco
-	} while (i < numReg);
-	
-	printf("Tem certeza que deseja remover %s? [S/N]", p->nome);
-	scanf(" %c", &conf);
-	if (conf == 'S') {//se usuario confirmar
-		const unsigned long int m = 43991;
-		unsigned long index = f_foldadd(contato.nome, m);
-		if (q == NULL) {//indica que só há um contato naquela posicao da agenda
-			agenda[index] = p->prox;
-		} else {
-			printf("q, RG: %s\n", q->RG);
-			printf("p, RG: %s\n", p->RG);
-			if (p->prox == NULL) {
-				printf("p->prox é nulo\n");
-				q->prox = NULL;
-			}
-			q->prox = p->prox;
-		}
-		printf("Removendo RG: %s\n", p->RG);
-		free(p);//libera registro da memoria
-		return 1;
-	} else {//se usuario cancelar
-		return 0;//retorna falha na remocao
 	}
+	
+	unsigned long int m = 43991;
+	unsigned long index = f_foldadd(nomeContato, m);
+	if(q == NULL) {
+		printf("q é nulo\n");
+		agenda[index] = agenda[index]->prox;
+	} else {
+		printf("q (RG: %s) não é nulo\n", q->RG);
+		if (p != NULL)printf("p (RG: %s)\n", p->RG);
+		if (p->prox != NULL) printf("p->prox (RG: %s)\n", p->prox->RG);
+		q->prox = p->prox;
+	}
+	free(p);
 }
 
 void exibirRegistro(REGISTRO cont, char *nome, int numerar) {
