@@ -16,11 +16,11 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
-//#include <locale.h>
+#include <locale.h>
 #include "tabhash.c"
 
 int main(int argc, char *argv[]) {
-	//setlocale(LC_ALL, "Portuguese");
+	setlocale(LC_ALL, "");
 	const unsigned long int m = 43991; // http://compoasso.free.fr/primelistweb/page/prime/liste_online_en.php
 	const long double A = (sqrt(5) - 1) / 2.0;
 	
@@ -82,9 +82,9 @@ int main(int argc, char *argv[]) {
 					}
 					break;
 				case 4:
-					//printf("Digite o nome do arquivo: ");
-		 	   		//scanf("%s", nome);
-		 	   		if (!importarRegistros("registros.txt", tabelaHash)) {
+					printf("Digite o nome do arquivo: ");
+		 	   		scanf("%s", nome);
+		 	   		if (!importarRegistros(nome, tabelaHash)) {
 		 	   			printf("Os contatos não foram importados!\n");
 		 	   			exit(1);
 					} else {
