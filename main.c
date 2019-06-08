@@ -39,14 +39,14 @@ int main(int argc, char *argv[]) {
 		printf("\tRemover um contato..............[3]\n");
 		printf("\tImportar contatos...............[4]\n");
 		printf("\tSair............................[0]\n");
-		printf("\nDigite a opção: ");
+		printf("\nDigite a opÃ§Ã£o: ");
 		scanf("%d", &opt);
 		system("clear");
 		switch (opt) {
 			   case 1:
 			   		printf("\t\tADICIONAR CONTATO\n\n");
 		 	   		printf("Digite o nome do contato: ");
-		 	   		scanf("%s", nome);
+		 	   		scanf(" %[^\n]", nome);
 		 	   		printf("Digite o RG: ");
 		 	   		scanf("%s", rg);
 		 	   		printf("Digite o ano de nascimento: ");
@@ -67,7 +67,7 @@ int main(int argc, char *argv[]) {
 					break;
 				case 2:
 					printf("Digite o nome do contato: ");
-		 	   		scanf("%s", nome);
+		 	   		scanf(" %[^\n]", nome);
 		 	   		if (!isInHash(nome, tabelaHash, &contato)) {
 		 	   			printf("O contato não foi encontrado!\n");
 					} else {
@@ -76,14 +76,14 @@ int main(int argc, char *argv[]) {
 		 	   		break;
 		 	   	case 3:
 		 	   		printf("Digite o nome do contato: ");
-		 	   		scanf("%s", nome);
+		 	   		scanf(" %[^\n]", nome);
 		 	   		if (!removeFromHash(nome, tabelaHash)) {
 						printf("O contato não foi removido!\n");
 					}
 					break;
 				case 4:
 					printf("Digite o nome do arquivo: ");
-		 	   		scanf("%s", nome);
+		 	   		scanf(" %[^\n]", nome);
 		 	   		if (!importarRegistros(nome, tabelaHash)) {
 		 	   			printf("Os contatos não foram importados!\n");
 		 	   			exit(1);
